@@ -26,6 +26,8 @@ const choices = {
   spock: { name: 'Spock', defeats: ['scissors', 'rock'] },
 };
 
+let playerScoreNumber = 0;
+let computerScoreNumber = 0;
 let computerChoice = '';
 
 // Reset All
@@ -79,16 +81,28 @@ function displayComputerChoice() {
   }
 }
 
+// Check Result, Increase Scores, Update ResultText
+function updateScore(playerChoice) {
+  console.log(playerChoice, computerChoice);
+  if (playerChoice === computerChoice) {
+    resultText.textContent = "It's a tie!";
+  } else {
+    const choice = choices[playerChoice];
+    console.log(choice.defeats.indexOf(computerChoice));
+  }
+}
+
 // Call functions to process turn
-function checkResult() {
+function checkResult(playerChoice) {
   resetSelected();
   computerRandomChoice();
   displayComputerChoice();
+  updateScore(playerChoice);
 }
 
 // Passing Player Selection Value and Styling Icons
 function select(playerChoice) {
-  checkResult();
+  checkResult(playerChoice);
   // Add 'Selected' Styling and Player Choice
   switch (playerChoice) {
     case 'rock':
